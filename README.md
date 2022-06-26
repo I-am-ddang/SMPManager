@@ -8,12 +8,13 @@ SMPManager is open source bukkit plugin that add more game contents into Minecra
 
 Below is a list of all features and detailed description are located at the bottom.
  
-* 1개 이상의 특수 조합법 추가  / Custom Crafting Recipes
+* 1개 이상의 특수 조합법 추가  / 1+ Custom Crafting Recipes
 * 부활시 오버월드 중 무작위 범위 안에 배치 / Respawn Teleport (Overworld Random Range)
 * 모든 플레이어를 오버월드 무작위 범위 안에 재배치 / Telport players at overworld random range
 * 특정 월드 좌표, 채팅 가리기 / Hide World's Coordinate and Chat
 * 메뉴 명령어와 빠른 메뉴(웅크리고 손 바꾸기 키) 지원 / Menu Command and Quick Menu Key(Sneak + Swap hand item key) Support
-* 1개 이상 특수 행사 개최 / Hold Custom Event
+* 1개 이상 특수 행사 개최 / 1+ Hold Custom Event
+* 2개의 이상의 특수 아이템 추가 / 2+ Custom Item
 
 ### 특수 조합법 추가  / Custom Crafting Recipes
 
