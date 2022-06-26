@@ -5,6 +5,7 @@ SMPManager is open source bukkit plugin that add more game contents into Minecra
 
 ## Features / 다음의 기능을 지원합니다. 
 아래는 모든 기능의 목록이며 자세한 설명은 하단에 위치합니다.
+
 Below is a list of all features and detailed description are located at the bottom.
  
 * 특수 조합법 추가  / New Custom Crafting Recipes
