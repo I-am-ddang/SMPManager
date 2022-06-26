@@ -14,9 +14,33 @@ class GUIManager {
         fun getInventory(inventoryName: InventoryName): Inventory {
             when (inventoryName) {
                 InventoryName.MENU -> {
-                    val i = Bukkit.createInventory(MenuGUI(), 9, ComponentUtil.toText(
+                    val i = Bukkit.createInventory(MenuGUI(), 18, ComponentUtil.toText(
                         "메뉴", "000000"
                     ))
+
+                    for (n in 0..8) {
+                        i.setItem(n, ItemUtil.toItem(
+                            Material.ORANGE_STAINED_GLASS_PANE, 1,
+                            ComponentUtil.toText("지속적인 기능", Color.GOLD.code),
+                            arrayListOf(
+                                ComponentUtil.toText("", Color.WHITE.code),
+                                ComponentUtil.toText("해당 줄에 위치한 기능들은 지속적인 기능으로", Color.WHITE.code),
+                                ComponentUtil.toText("끄고 켤 수 있습니다.", Color.WHITE.code)
+                            )
+                        ))
+                    }
+
+                    for (n in 9..17) {
+                        i.setItem(n, ItemUtil.toItem(
+                            Material.LIME_STAINED_GLASS_PANE, 1,
+                            ComponentUtil.toText("일회성 기능", Color.LIME.code),
+                            arrayListOf(
+                                ComponentUtil.toText("", Color.WHITE.code),
+                                ComponentUtil.toText("해당 줄에 위치한 기능들은 일회성 기능으로", Color.WHITE.code),
+                                ComponentUtil.toText("시작과 끝이 있습니다.", Color.WHITE.code)
+                            )
+                        ))
+                    }
 
                     var item = ItemUtil.toItem(
                         Material.PLAYER_HEAD, 1,
@@ -26,11 +50,11 @@ class GUIManager {
                         )
                     )
                     ItemUtil.applyStringPDC(item, "identify", "0")
-                    i.setItem(0, item)
+                    i.setItem(10, item)
 
                     item = ItemUtil.toItem(
                         Material.CRAFTING_TABLE, 1,
-                        ComponentUtil.toText("특수 조합법 목록", Color.LIME.code),
+                        ComponentUtil.toText("특수 조합법 설정", Color.LIME.code),
                         arrayListOf(
                             ComponentUtil.toText("", Color.WHITE.code)
                         )
@@ -41,7 +65,7 @@ class GUIManager {
 
                     item = ItemUtil.toItem(
                         Material.SKELETON_SKULL, 1,
-                        ComponentUtil.toText("사망시 무작위 위치 재배치", Color.LIME.code),
+                        ComponentUtil.toText("사망시 무작위 위치 재배치 설정", Color.LIME.code),
                         arrayListOf(
                             ComponentUtil.toText("", Color.WHITE.code)
                         )
@@ -51,7 +75,7 @@ class GUIManager {
 
                     item = ItemUtil.toItem(
                         Material.COMPASS, 1,
-                        ComponentUtil.toText("특정 월드 좌표와 채팅 가리기", Color.LIME.code),
+                        ComponentUtil.toText("특정 월드 좌표와 채팅 가리기 설정", Color.LIME.code),
                         arrayListOf(
                             ComponentUtil.toText("", Color.WHITE.code)
                         )
@@ -59,6 +83,18 @@ class GUIManager {
                     ItemUtil.applyStringPDC(item, "identify", "3")
 
                     i.setItem(3, item)
+
+                    item = ItemUtil.toItem(
+                        Material.TOTEM_OF_UNDYING, 1,
+                        ComponentUtil.toText("특수 행사 개최", Color.LIME.code),
+                        arrayListOf(
+                            ComponentUtil.toText("", Color.WHITE.code)
+                        )
+                    )
+                    ItemUtil.applyStringPDC(item, "identify", "4")
+
+                    i.setItem(11, item)
+
                     return i
                 }
             }
