@@ -1,0 +1,13 @@
+name: SMPManager
+version: 1.0.1
+main: com.ddang_.smpmanager.Smpmanager
+api-version: 1.18
+authors: [ DDang_ ]
+description: Minecraft 1.18.2 SMP Game Manager
+website: https://github.com/I-am-ddang
+depend:
+  - Kotlin
+commands:
+  smpmenu:
+    aliases:
+      - 야생메뉴
