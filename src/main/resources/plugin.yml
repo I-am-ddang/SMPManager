@@ -11,3 +11,5 @@ commands:
   smpmenu:
     aliases:
       - 야생메뉴
+    permission: command.smpmenu
+    permission-message: "§c권한이 없습니다."

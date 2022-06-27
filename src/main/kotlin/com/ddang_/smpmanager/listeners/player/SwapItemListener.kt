@@ -17,8 +17,8 @@ class SwapItemListener: Listener {
             return
         }
 
-        //관리자 아니면 리턴
-        if (!p.isOp) {
+        //권한 없으면 리턴
+        if (!p.hasPermission("smpmanager.smpmenu")) {
             return
         }
 

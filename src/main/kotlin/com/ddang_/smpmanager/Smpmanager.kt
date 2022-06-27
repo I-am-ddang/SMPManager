@@ -38,6 +38,8 @@ class Smpmanager : JavaPlugin() {
         scheduler = server.scheduler
         pluginConfig = PluginConfigManager.set()
 
+        PluginConfigManager.firstSet()
+
         //이벤트 등록
         server.pluginManager.apply { events.forEach { registerEvents(it, this@Smpmanager) } }
 

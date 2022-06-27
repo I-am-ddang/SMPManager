@@ -14,10 +14,6 @@ class MenuCommand: CommandExecutor {
             return false
         }
 
-        if (!sender.isOp) {
-            return false
-        }
-
         val i = GUIManager.getInventory(InventoryName.MENU)
         sender.openInventory(i)
 

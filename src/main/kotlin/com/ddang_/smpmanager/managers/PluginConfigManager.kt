@@ -25,5 +25,19 @@ class PluginConfigManager {
 
             configData.save(file)
         }
+
+        fun firstSet() {
+            val file = File(Smpmanager.instance.dataFolder, "pluginConfig.yml")
+            val configData = YamlConfiguration.loadConfiguration(file)
+
+            if (configData.get("Setting.new") != null) {
+                return
+            }
+
+            configData["Setting.new"] = true
+            configData["Setting.QuickMenu"] = true
+
+            configData.save(file)
+        }
     }
 }

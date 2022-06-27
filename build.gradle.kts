@@ -38,7 +38,7 @@ tasks {
         kotlinOptions.jvmTarget = "16"
     }
     createJar("outJar") {
-        val dest = File("C:/Users/psych/Desktop/1.18.2 yasang config done/plugins")
+        val dest = File("C:/Users/psych/Desktop/minecraft 2022/servers/1.18.2 yasang config done/plugins")
         doLast {
             copy {
                 from(archiveFile)
