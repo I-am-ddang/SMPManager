@@ -1,5 +1,5 @@
 package com.ddang_.smpmanager.enums
 
 enum class ChatState {
-    NONE, RANGE_SET;
+    NONE, RANDOM_TELEPORT_RANGE_SET, RANDOM_RESPAWN_RANGE_SET;
 }

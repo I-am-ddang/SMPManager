@@ -13,8 +13,10 @@ class PluginConfigManager {
             val configData = YamlConfiguration.loadConfiguration(file)
 
             val quickMenu = configData.getBoolean("Setting.QuickMenu")
+            val randomRespawn = configData.getBoolean("Setting.RandomRespawn")
+            val randomRespawnRange = configData.getInt("Setting.RandomRespawnRange")
 
-            return PluginConfig(quickMenu)
+            return PluginConfig(quickMenu, randomRespawn, randomRespawnRange)
         }
 
         fun save() {
@@ -22,6 +24,8 @@ class PluginConfigManager {
             val configData = YamlConfiguration.loadConfiguration(file)
 
             configData["Setting.QuickMenu"] = Smpmanager.pluginConfig.quickMenu
+            configData["Setting.RandomRespawn"] = Smpmanager.pluginConfig.randomRespawn
+            configData["Setting.RandomRespawnRange"] = Smpmanager.pluginConfig.randomRespawnRange
 
             configData.save(file)
         }
@@ -30,14 +34,17 @@ class PluginConfigManager {
             val file = File(Smpmanager.instance.dataFolder, "pluginConfig.yml")
             val configData = YamlConfiguration.loadConfiguration(file)
 
-            if (configData.get("Setting.new") != null) {
-                return
-            }
-
-            configData["Setting.new"] = true
-            configData["Setting.QuickMenu"] = true
+            nullSet(configData, "Setting.QuickMenu", true)
+            nullSet(configData, "Setting.RandomRespawn", true)
+            nullSet(configData, "Setting.RandomRespawnRange", 0)
 
             configData.save(file)
+        }
+
+        private fun nullSet(yaml: YamlConfiguration, string: String, value: Any) {
+            if (yaml.get(string) == null) {
+                yaml[string] = value
+            }
         }
     }
 }

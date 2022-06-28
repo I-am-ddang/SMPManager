@@ -1,8 +1,10 @@
 package com.ddang_.smpmanager.managers
 
+import com.ddang_.smpmanager.Smpmanager
 import com.ddang_.smpmanager.enums.Color
 import com.ddang_.smpmanager.enums.InventoryName
 import com.ddang_.smpmanager.guis.MenuGUI
+import com.ddang_.smpmanager.guis.RandomRespawnGUI
 import com.ddang_.smpmanager.utils.ComponentUtil
 import com.ddang_.smpmanager.utils.ItemUtil
 import org.bukkit.Bukkit
@@ -73,7 +75,7 @@ class GUIManager {
 
                     item = ItemUtil.toItem(
                         Material.SKELETON_SKULL, 1,
-                        ComponentUtil.toText("사망시 무작위 위치 재배치 설정", Color.LIME.code),
+                        ComponentUtil.toText("무작위 부활 위치 설정", Color.LIME.code),
                         arrayListOf(
                             ComponentUtil.toText("", Color.WHITE.code),
                             ComponentUtil.toText("사망시 오버월드의 무작위 위치에서", Color.WHITE.code),
@@ -114,6 +116,67 @@ class GUIManager {
                     ItemUtil.applyStringPDC(item, "identify", "4")
 
                     i.setItem(11, item)
+
+                    return i
+                }
+                InventoryName.RANDOM_RESPAWN -> {
+                    val i = Bukkit.createInventory(RandomRespawnGUI(), 9, ComponentUtil.toText(
+                        "무작위 부활 위치 설정", "000000"
+                    ))
+
+                    val option = Smpmanager.pluginConfig.randomRespawn
+
+                    var item = when (option) {
+                        true -> {
+                            ItemUtil.toItem(
+                                Material.LIME_TERRACOTTA, 1,
+                                ComponentUtil.toText("활성화 여부: 활성화", Color.LIME.code),
+                                arrayListOf(
+                                    ComponentUtil.toText("", Color.WHITE.code),
+                                    ComponentUtil.toText("무작위 위치에서 부활하는 기능을", Color.WHITE.code),
+                                    ComponentUtil.toText("활성화한 상태입니다.", Color.WHITE.code),
+                                    ComponentUtil.toText("", Color.WHITE.code),
+                                    ComponentUtil.toText("클릭시 비활성화합니다.", Color.YELLOW.code)
+                                )
+                            )
+                        }
+                        false -> {
+                            ItemUtil.toItem(
+                                Material.RED_TERRACOTTA, 1,
+                                ComponentUtil.toText("활성화 여부: 비활성화", Color.LIME.code),
+                                arrayListOf(
+                                    ComponentUtil.toText("", Color.WHITE.code),
+                                    ComponentUtil.toText("무작위 위치에서 부활하는 기능을", Color.WHITE.code),
+                                    ComponentUtil.toText("비활성화한 상태입니다.", Color.WHITE.code),
+                                    ComponentUtil.toText("", Color.WHITE.code),
+                                    ComponentUtil.toText("클릭시 활성화합니다.", Color.YELLOW.code)
+                                )
+                            )
+                        }
+                    }
+                    when (option) {
+                        true -> {
+                            ItemUtil.applyStringPDC(item, "identify", "0")
+                        }
+                        false -> {
+                            ItemUtil.applyStringPDC(item, "identify", "1")
+                        }
+                    }
+                    i.setItem(0, item)
+
+                    item = ItemUtil.toItem(
+                        Material.ENDER_EYE, 1,
+                        ComponentUtil.toText("범위 설정", Color.LIME.code),
+                        arrayListOf(
+                            ComponentUtil.toText("", Color.WHITE.code),
+                            ComponentUtil.toText("무작위 위치에서 부활하는 기능의", Color.WHITE.code),
+                            ComponentUtil.toText("부활 범위를 설정합니다.", Color.WHITE.code),
+                            ComponentUtil.toText("", Color.WHITE.code),
+                            ComponentUtil.toText("클릭시 설정합니다.", Color.YELLOW.code)
+                        )
+                    )
+                    ItemUtil.applyStringPDC(item, "identify", "2")
+                    i.setItem(1, item)
 
                     return i
                 }

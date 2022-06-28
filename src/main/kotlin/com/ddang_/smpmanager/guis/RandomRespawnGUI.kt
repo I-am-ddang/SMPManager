@@ -10,7 +10,7 @@ import org.bukkit.entity.Player
 import org.bukkit.event.inventory.InventoryClickEvent
 import org.bukkit.event.inventory.InventoryCloseEvent
 
-class MenuGUI: CustomGUIHolder() {
+class RandomRespawnGUI: CustomGUIHolder() {
     override fun clickProcess(e: InventoryClickEvent) {
         val p = e.whoClicked as Player
 
@@ -21,26 +21,12 @@ class MenuGUI: CustomGUIHolder() {
 
         when (identify) {
             "0" -> {
-                p.closeInventory()
-                val m = MemberManager.getMember(p.name) ?: return
-                m.chatState = ChatState.RANDOM_TELEPORT_RANGE_SET
-                p.sendMessage(
-                    Component.text().append(
-                        ComponentUtil.toText("  모든 플레이어 재배치", Color.LIME.code),
-                        ComponentUtil.toText(" 채팅창에 재배치 범위를 적어주세요.", Color.WHITE.code)
-                    ).build()
-                )
+
             }
             "1" -> {
 
             }
             "2" -> {
-
-            }
-            "3" -> {
-
-            }
-            "4" -> {
 
             }
             else -> {
