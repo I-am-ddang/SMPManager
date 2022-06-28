@@ -3,7 +3,9 @@ package com.ddang_.smpmanager
 import com.ddang_.smpmanager.commands.MenuCommand
 import com.ddang_.smpmanager.listeners.inventory.ClickListener
 import com.ddang_.smpmanager.listeners.inventory.CloseListener
+import com.ddang_.smpmanager.listeners.player.AsyncChatListener
 import com.ddang_.smpmanager.listeners.player.SwapItemListener
+import com.ddang_.smpmanager.managers.MemberManager
 import com.ddang_.smpmanager.managers.PluginConfigManager
 import com.ddang_.smpmanager.objects.PluginConfig
 import org.bukkit.Bukkit
@@ -28,17 +30,32 @@ class Smpmanager : JavaPlugin() {
 
     }
 
+    private fun memberSave() {
+        players.forEach {
+            MemberManager.save(it)
+        }
+    }
+
+    private fun memberSet() {
+        players.forEach {
+            MemberManager.set(it)
+        }
+    }
+
     private val events = arrayOf(
-        SwapItemListener(), ClickListener(), CloseListener()
+        SwapItemListener(), ClickListener(), CloseListener(), AsyncChatListener()
     )
 
     override fun onEnable() {
         players = server.onlinePlayers
         instance = this
         scheduler = server.scheduler
-        pluginConfig = PluginConfigManager.set()
 
         PluginConfigManager.firstSet()
+
+        pluginConfig = PluginConfigManager.set()
+
+        memberSet()
 
         //이벤트 등록
         server.pluginManager.apply { events.forEach { registerEvents(it, this@Smpmanager) } }
@@ -49,5 +66,7 @@ class Smpmanager : JavaPlugin() {
 
     override fun onDisable() {
         PluginConfigManager.save()
+
+        memberSave()
     }
 }

@@ -13,7 +13,27 @@ class MenuGUI: CustomGUIHolder() {
 
         val item = e.currentItem ?: return
         val identify = ItemUtil.getStringPDC(item, "identify") ?: return
-        return
+
+        when (identify) {
+            "0" -> {
+
+            }
+            "1" -> {
+
+            }
+            "2" -> {
+
+            }
+            "3" -> {
+
+            }
+            "4" -> {
+
+            }
+            else -> {
+                return
+            }
+        }
     }
 
     override fun closeProcess(e: InventoryCloseEvent) {

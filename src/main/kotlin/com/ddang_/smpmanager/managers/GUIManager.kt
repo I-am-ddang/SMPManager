@@ -46,7 +46,11 @@ class GUIManager {
                         Material.PLAYER_HEAD, 1,
                         ComponentUtil.toText("모든 플레이어 재배치", Color.LIME.code),
                         arrayListOf(
-                            ComponentUtil.toText("", Color.WHITE.code)
+                            ComponentUtil.toText("", Color.WHITE.code),
+                            ComponentUtil.toText("모든 플레이어를 자신의 월드의 특정 범위", Color.WHITE.code),
+                            ComponentUtil.toText("안에 무작위로 재배치합니다.", Color.WHITE.code),
+                            ComponentUtil.toText("", Color.WHITE.code),
+                            ComponentUtil.toText("클릭시 진행합니다.", Color.YELLOW.code)
                         )
                     )
                     ItemUtil.applyStringPDC(item, "identify", "0")
@@ -54,9 +58,13 @@ class GUIManager {
 
                     item = ItemUtil.toItem(
                         Material.CRAFTING_TABLE, 1,
-                        ComponentUtil.toText("특수 조합법 설정", Color.LIME.code),
+                        ComponentUtil.toText("특수 아이템 조합법 설정", Color.LIME.code),
                         arrayListOf(
-                            ComponentUtil.toText("", Color.WHITE.code)
+                            ComponentUtil.toText("", Color.WHITE.code),
+                            ComponentUtil.toText("특수한 아이템을 얻을 수 있는", Color.WHITE.code),
+                            ComponentUtil.toText("조합법을 활성화하거나 조합식을 바꿉니다.", Color.WHITE.code),
+                            ComponentUtil.toText("", Color.WHITE.code),
+                            ComponentUtil.toText("클릭시 설정합니다.", Color.YELLOW.code)
                         )
                     )
                     ItemUtil.applyStringPDC(item, "identify", "1")
@@ -67,7 +75,11 @@ class GUIManager {
                         Material.SKELETON_SKULL, 1,
                         ComponentUtil.toText("사망시 무작위 위치 재배치 설정", Color.LIME.code),
                         arrayListOf(
-                            ComponentUtil.toText("", Color.WHITE.code)
+                            ComponentUtil.toText("", Color.WHITE.code),
+                            ComponentUtil.toText("사망시 오버월드의 무작위 위치에서", Color.WHITE.code),
+                            ComponentUtil.toText("부활하도록 설정합니다.", Color.WHITE.code),
+                            ComponentUtil.toText("", Color.WHITE.code),
+                            ComponentUtil.toText("클릭시 설정합니다.", Color.YELLOW.code)
                         )
                     )
                     ItemUtil.applyStringPDC(item, "identify", "2")
@@ -77,7 +89,11 @@ class GUIManager {
                         Material.COMPASS, 1,
                         ComponentUtil.toText("특정 월드 좌표와 채팅 가리기 설정", Color.LIME.code),
                         arrayListOf(
-                            ComponentUtil.toText("", Color.WHITE.code)
+                            ComponentUtil.toText("", Color.WHITE.code),
+                            ComponentUtil.toText("특정 월드에서 좌표를 볼 수 없게 하고", Color.WHITE.code),
+                            ComponentUtil.toText("채팅을 보낼 수 없게 설정합니다.", Color.WHITE.code),
+                            ComponentUtil.toText("", Color.WHITE.code),
+                            ComponentUtil.toText("클릭시 설정합니다.", Color.YELLOW.code)
                         )
                     )
                     ItemUtil.applyStringPDC(item, "identify", "3")
@@ -88,7 +104,11 @@ class GUIManager {
                         Material.TOTEM_OF_UNDYING, 1,
                         ComponentUtil.toText("특수 행사 개최", Color.LIME.code),
                         arrayListOf(
-                            ComponentUtil.toText("", Color.WHITE.code)
+                            ComponentUtil.toText("", Color.WHITE.code),
+                            ComponentUtil.toText("서버에서 진행하는 특수 행사를", Color.WHITE.code),
+                            ComponentUtil.toText("살펴보고 개최할 수 있습니다.", Color.WHITE.code),
+                            ComponentUtil.toText("", Color.WHITE.code),
+                            ComponentUtil.toText("클릭시 진행합니다.", Color.YELLOW.code)
                         )
                     )
                     ItemUtil.applyStringPDC(item, "identify", "4")
