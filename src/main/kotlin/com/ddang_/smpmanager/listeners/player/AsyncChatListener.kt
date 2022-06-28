@@ -24,7 +24,7 @@ class AsyncChatListener: Listener {
                     p.sendMessage(
                         Component.text().append(
                             ComponentUtil.toText("  모든 플레이어 재배치", Color.RED.code),
-                            ComponentUtil.toText(" 숫자를 입력해주세요.", Color.WHITE.code)
+                            ComponentUtil.toText(" 범위 설정을 위해 숫자를 입력해주세요.", Color.WHITE.code)
                         ).build()
                     )
                     m.chatState = ChatState.NONE
@@ -38,7 +38,7 @@ class AsyncChatListener: Listener {
                     p.sendMessage(
                         Component.text().append(
                             ComponentUtil.toText("  부활시 무작위 배치", Color.RED.code),
-                            ComponentUtil.toText(" 숫자를 입력해주세요.", Color.WHITE.code)
+                            ComponentUtil.toText(" 범위 설정을 위해 숫자를 입력해주세요.", Color.WHITE.code)
                         ).build()
                     )
                     m.chatState = ChatState.NONE
