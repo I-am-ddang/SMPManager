@@ -35,5 +35,21 @@ class WorldSettingOptionManager {
 
             worldData.save(file)
         }
+
+        fun firstSet(world: World) {
+            val file = File(Smpmanager.instance.dataFolder, "${File.separator}WorldData${File.separator}${world.name}.yml")
+            val configData = YamlConfiguration.loadConfiguration(file)
+
+            nullSet(configData, "Option.Coordinate", true)
+            nullSet(configData, "Option.Chat", true)
+
+            configData.save(file)
+        }
+
+        private fun nullSet(yaml: YamlConfiguration, string: String, value: Any) {
+            if (yaml.get(string) == null) {
+                yaml[string] = value
+            }
+        }
     }
 }

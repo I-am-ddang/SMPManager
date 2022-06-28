@@ -13,10 +13,12 @@ import com.ddang_.smpmanager.managers.MemberManager
 import com.ddang_.smpmanager.managers.PluginConfigManager
 import com.ddang_.smpmanager.managers.WorldSettingOptionManager
 import com.ddang_.smpmanager.objects.PluginConfig
+import com.ddang_.smpmanager.objects.WorldSettingOption
 import com.ddang_.smpmanager.utils.ComponentUtil
 import net.kyori.adventure.text.Component
 import net.kyori.adventure.title.Title
 import org.bukkit.Bukkit
+import org.bukkit.GameRule
 import org.bukkit.entity.Player
 import org.bukkit.plugin.Plugin
 import org.bukkit.plugin.java.JavaPlugin
@@ -82,6 +84,12 @@ class Smpmanager : JavaPlugin() {
         }
     }
 
+    private fun worldFirstSet() {
+        Bukkit.getWorlds().forEach {
+            WorldSettingOptionManager.firstSet(it)
+        }
+    }
+
     private fun worldSet() {
         Bukkit.getWorlds().forEach {
             WorldSettingOptionManager.set(it)
@@ -91,6 +99,15 @@ class Smpmanager : JavaPlugin() {
     private fun worldSave() {
         Bukkit.getWorlds().forEach {
             WorldSettingOptionManager.save(it)
+        }
+    }
+
+    private fun worldCoordSet() {
+        Bukkit.getWorlds().forEach {
+            val wso = WorldSettingOptionManager.getWorldSettingOption(it.name) ?: return@forEach
+            if (wso.coordinateOption) {
+                it.setGameRule(GameRule.REDUCED_DEBUG_INFO, true)
+            }
         }
     }
 
@@ -121,9 +138,13 @@ class Smpmanager : JavaPlugin() {
 
         memberSet()
 
+        worldFirstSet()
+
         worldSet()
 
         showTitlePerChatState()
+
+        worldCoordSet()
 
         //이벤트 등록
         server.pluginManager.apply { events.forEach { registerEvents(it, this@Smpmanager) } }
