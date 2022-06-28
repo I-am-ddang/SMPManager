@@ -18,7 +18,7 @@ class AsyncChatListener: Listener {
     fun onAsyncChat(e: AsyncChatEvent) {
         val p = e.player
 
-        if (p.isOp) {
+        if (p.hasPermission("smpmanager.chatselect")) {
             val m = MemberManager.getMember(p.name) ?: return
             when (m.chatState) {
                 ChatState.RANDOM_TELEPORT_RANGE_SET -> {
@@ -60,6 +60,7 @@ class AsyncChatListener: Listener {
         val wso = WorldSettingOptionManager.getWorldSettingOption(world.name) ?: return
         if (!wso.chatOption) {
             e.isCancelled = true
+            p.sendMessage("§c현재 설정에 의해 해당 월드에서 채팅을 보낼 수 없습니다.")
         }
     }
 }
