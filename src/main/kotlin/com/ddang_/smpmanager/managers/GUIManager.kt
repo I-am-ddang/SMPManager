@@ -5,8 +5,10 @@ import com.ddang_.smpmanager.enums.Color
 import com.ddang_.smpmanager.enums.InventoryName
 import com.ddang_.smpmanager.guis.MenuGUI
 import com.ddang_.smpmanager.guis.RandomRespawnGUI
+import com.ddang_.smpmanager.guis.WorldSettingGUI
 import com.ddang_.smpmanager.utils.ComponentUtil
 import com.ddang_.smpmanager.utils.ItemUtil
+import net.kyori.adventure.text.Component
 import org.bukkit.Bukkit
 import org.bukkit.Material
 import org.bukkit.inventory.Inventory
@@ -179,6 +181,105 @@ class GUIManager {
                     i.setItem(1, item)
 
                     return i
+                }
+                InventoryName.WORLD_SETTING -> {
+                    return when (Bukkit.getWorlds().size) {
+                        in 1..9 -> {
+                            val i = Bukkit.createInventory(WorldSettingGUI(), 9, ComponentUtil.toText(
+                                "월드 좌표/채팅 설정", "000000"
+                            ))
+
+                            for ((count, world) in Bukkit.getWorlds().withIndex()) {
+                                i.setItem(count,
+                                    when (world.name) {
+                                        "WORLD" -> {
+                                            ItemUtil.toItem(Material.GRASS_BLOCK, 1,
+                                                ComponentUtil.toText("오버월드 설정", Color.LIME.code),
+                                                arrayListOf(
+                                                    ComponentUtil.toText("", Color.WHITE.code),
+                                                    Component.text().append(
+                                                        ComponentUtil.toText("오버월드 채팅 가능 여부: ", Color.WHITE.code),
+                                                        ComponentUtil.toText("", Color.WHITE.code)
+                                                    ).build(),
+                                                    Component.text().append(
+                                                        ComponentUtil.toText("오버월드 좌표 활성화 여부: ", Color.WHITE.code),
+                                                        ComponentUtil.toText("", Color.WHITE.code)
+                                                    ).build()
+                                                )
+                                            )
+                                        }
+                                        "WORLD_NETHER" -> {
+                                            ItemUtil.toItem(Material.NETHERRACK, 1,
+                                                ComponentUtil.toText("네더 설정", Color.LIME.code),
+                                                arrayListOf(
+                                                    ComponentUtil.toText("", Color.WHITE.code),
+                                                    ComponentUtil.toText("", Color.WHITE.code),
+                                                    ComponentUtil.toText("", Color.WHITE.code)
+                                                )
+                                            )
+                                        }
+                                        "WORLD_THE_END" -> {
+                                            ItemUtil.toItem(Material.END_STONE, 1,
+                                                ComponentUtil.toText("엔드 설정", Color.LIME.code),
+                                                arrayListOf(
+                                                    ComponentUtil.toText("", Color.WHITE.code),
+                                                    ComponentUtil.toText("", Color.WHITE.code),
+                                                    ComponentUtil.toText("", Color.WHITE.code)
+                                                )
+                                            )
+                                        }
+                                        else -> {
+                                            ItemUtil.toItem(Material.STONE, 1,
+                                                ComponentUtil.toText("${world.name} 설정", Color.LIME.code),
+                                                arrayListOf(
+                                                    ComponentUtil.toText("", Color.WHITE.code),
+                                                    ComponentUtil.toText("", Color.WHITE.code),
+                                                    ComponentUtil.toText("", Color.WHITE.code)
+                                                )
+                                            )
+                                        }
+                                    }
+                                )
+                            }
+
+                            i
+                        }
+                        in 10..18 -> {
+                            val i = Bukkit.createInventory(WorldSettingGUI(), 9, ComponentUtil.toText(
+                                "월드 좌표/채팅 설정", "000000"
+                            ))
+                            i
+                        }
+                        in 19..27 -> {
+                            val i = Bukkit.createInventory(WorldSettingGUI(), 9, ComponentUtil.toText(
+                                "월드 좌표/채팅 설정", "000000"
+                            ))
+                            i
+                        }
+                        in 28..36 -> {
+                            val i = Bukkit.createInventory(WorldSettingGUI(), 9, ComponentUtil.toText(
+                                "월드 좌표/채팅 설정", "000000"
+                            ))
+                            i
+                        }
+                        in 37..45 -> {
+                            val i = Bukkit.createInventory(WorldSettingGUI(), 9, ComponentUtil.toText(
+                                "월드 좌표/채팅 설정", "000000"
+                            ))
+                            i
+                        }
+                        in 46..54 -> {
+                            val i = Bukkit.createInventory(WorldSettingGUI(), 9, ComponentUtil.toText(
+                                "월드 좌표/채팅 설정", "000000"
+                            ))
+                            i
+                        }
+                        else -> {
+                            Bukkit.createInventory(null, 9, ComponentUtil.toText(
+                                "오류! 세계가 존재하지 않거나 너무 많습니다.", "000000"
+                            ))
+                        }
+                    }
                 }
             }
         }

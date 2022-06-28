@@ -7,6 +7,7 @@ import com.ddang_.smpmanager.enums.Color
 import com.ddang_.smpmanager.listeners.inventory.ClickListener
 import com.ddang_.smpmanager.listeners.inventory.CloseListener
 import com.ddang_.smpmanager.listeners.player.AsyncChatListener
+import com.ddang_.smpmanager.listeners.player.RespawnListener
 import com.ddang_.smpmanager.listeners.player.SwapItemListener
 import com.ddang_.smpmanager.managers.MemberManager
 import com.ddang_.smpmanager.managers.PluginConfigManager
@@ -93,7 +94,7 @@ class Smpmanager : JavaPlugin() {
     }
 
     private val events = arrayOf(
-        SwapItemListener(), ClickListener(), CloseListener(), AsyncChatListener()
+        SwapItemListener(), ClickListener(), CloseListener(), AsyncChatListener(), RespawnListener()
     )
 
     override fun onEnable() {

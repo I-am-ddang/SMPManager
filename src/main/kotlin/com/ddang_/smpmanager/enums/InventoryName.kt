@@ -1,5 +1,5 @@
 package com.ddang_.smpmanager.enums
 
 enum class InventoryName {
-    MENU, RANDOM_RESPAWN;
+    MENU, RANDOM_RESPAWN, WORLD_SETTING;
 }
