@@ -11,6 +11,7 @@ import com.ddang_.smpmanager.listeners.player.RespawnListener
 import com.ddang_.smpmanager.listeners.player.SwapItemListener
 import com.ddang_.smpmanager.managers.MemberManager
 import com.ddang_.smpmanager.managers.PluginConfigManager
+import com.ddang_.smpmanager.managers.WorldSettingOptionManager
 import com.ddang_.smpmanager.objects.PluginConfig
 import com.ddang_.smpmanager.utils.ComponentUtil
 import net.kyori.adventure.text.Component
@@ -81,6 +82,18 @@ class Smpmanager : JavaPlugin() {
         }
     }
 
+    private fun worldSet() {
+        Bukkit.getWorlds().forEach {
+            WorldSettingOptionManager.set(it)
+        }
+    }
+
+    private fun worldSave() {
+        Bukkit.getWorlds().forEach {
+            WorldSettingOptionManager.save(it)
+        }
+    }
+
     private fun memberSave() {
         players.forEach {
             MemberManager.save(it)
@@ -108,6 +121,8 @@ class Smpmanager : JavaPlugin() {
 
         memberSet()
 
+        worldSet()
+
         showTitlePerChatState()
 
         //이벤트 등록
@@ -121,5 +136,7 @@ class Smpmanager : JavaPlugin() {
         PluginConfigManager.save()
 
         memberSave()
+
+        worldSave()
     }
 }

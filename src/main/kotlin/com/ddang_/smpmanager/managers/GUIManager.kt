@@ -3,6 +3,7 @@ package com.ddang_.smpmanager.managers
 import com.ddang_.smpmanager.Smpmanager
 import com.ddang_.smpmanager.enums.Color
 import com.ddang_.smpmanager.enums.InventoryName
+import com.ddang_.smpmanager.enums.WorldSettingOption
 import com.ddang_.smpmanager.guis.MenuGUI
 import com.ddang_.smpmanager.guis.RandomRespawnGUI
 import com.ddang_.smpmanager.guis.WorldSettingGUI
@@ -183,104 +184,153 @@ class GUIManager {
                     return i
                 }
                 InventoryName.WORLD_SETTING -> {
-                    return when (Bukkit.getWorlds().size) {
+                    when (Bukkit.getWorlds().size) {
                         in 1..9 -> {
                             val i = Bukkit.createInventory(WorldSettingGUI(), 9, ComponentUtil.toText(
                                 "월드 좌표/채팅 설정", "000000"
                             ))
 
-                            for ((count, world) in Bukkit.getWorlds().withIndex()) {
-                                i.setItem(count,
-                                    when (world.name) {
-                                        "WORLD" -> {
-                                            ItemUtil.toItem(Material.GRASS_BLOCK, 1,
-                                                ComponentUtil.toText("오버월드 설정", Color.LIME.code),
-                                                arrayListOf(
-                                                    ComponentUtil.toText("", Color.WHITE.code),
-                                                    Component.text().append(
-                                                        ComponentUtil.toText("오버월드 채팅 가능 여부: ", Color.WHITE.code),
-                                                        ComponentUtil.toText("", Color.WHITE.code)
-                                                    ).build(),
-                                                    Component.text().append(
-                                                        ComponentUtil.toText("오버월드 좌표 활성화 여부: ", Color.WHITE.code),
-                                                        ComponentUtil.toText("", Color.WHITE.code)
-                                                    ).build()
-                                                )
-                                            )
-                                        }
-                                        "WORLD_NETHER" -> {
-                                            ItemUtil.toItem(Material.NETHERRACK, 1,
-                                                ComponentUtil.toText("네더 설정", Color.LIME.code),
-                                                arrayListOf(
-                                                    ComponentUtil.toText("", Color.WHITE.code),
-                                                    ComponentUtil.toText("", Color.WHITE.code),
-                                                    ComponentUtil.toText("", Color.WHITE.code)
-                                                )
-                                            )
-                                        }
-                                        "WORLD_THE_END" -> {
-                                            ItemUtil.toItem(Material.END_STONE, 1,
-                                                ComponentUtil.toText("엔드 설정", Color.LIME.code),
-                                                arrayListOf(
-                                                    ComponentUtil.toText("", Color.WHITE.code),
-                                                    ComponentUtil.toText("", Color.WHITE.code),
-                                                    ComponentUtil.toText("", Color.WHITE.code)
-                                                )
-                                            )
-                                        }
-                                        else -> {
-                                            ItemUtil.toItem(Material.STONE, 1,
-                                                ComponentUtil.toText("${world.name} 설정", Color.LIME.code),
-                                                arrayListOf(
-                                                    ComponentUtil.toText("", Color.WHITE.code),
-                                                    ComponentUtil.toText("", Color.WHITE.code),
-                                                    ComponentUtil.toText("", Color.WHITE.code)
-                                                )
-                                            )
-                                        }
-                                    }
-                                )
-                            }
+                            worldSettingAssist(i)
 
-                            i
+                            return i
                         }
                         in 10..18 -> {
-                            val i = Bukkit.createInventory(WorldSettingGUI(), 9, ComponentUtil.toText(
+                            val i = Bukkit.createInventory(WorldSettingGUI(), 9*2, ComponentUtil.toText(
                                 "월드 좌표/채팅 설정", "000000"
                             ))
-                            i
+
+                            worldSettingAssist(i)
+
+                            return i
                         }
                         in 19..27 -> {
-                            val i = Bukkit.createInventory(WorldSettingGUI(), 9, ComponentUtil.toText(
+                            val i = Bukkit.createInventory(WorldSettingGUI(), 9*3, ComponentUtil.toText(
                                 "월드 좌표/채팅 설정", "000000"
                             ))
-                            i
+
+                            worldSettingAssist(i)
+
+                            return i
                         }
                         in 28..36 -> {
-                            val i = Bukkit.createInventory(WorldSettingGUI(), 9, ComponentUtil.toText(
+                            val i = Bukkit.createInventory(WorldSettingGUI(), 9*4, ComponentUtil.toText(
                                 "월드 좌표/채팅 설정", "000000"
                             ))
-                            i
+
+                            worldSettingAssist(i)
+
+                            return i
                         }
                         in 37..45 -> {
-                            val i = Bukkit.createInventory(WorldSettingGUI(), 9, ComponentUtil.toText(
+                            val i = Bukkit.createInventory(WorldSettingGUI(), 9*5, ComponentUtil.toText(
                                 "월드 좌표/채팅 설정", "000000"
                             ))
-                            i
+
+                            worldSettingAssist(i)
+
+                            return i
                         }
                         in 46..54 -> {
-                            val i = Bukkit.createInventory(WorldSettingGUI(), 9, ComponentUtil.toText(
+                            val i = Bukkit.createInventory(WorldSettingGUI(), 9*6, ComponentUtil.toText(
                                 "월드 좌표/채팅 설정", "000000"
                             ))
-                            i
+
+                            worldSettingAssist(i)
+
+                            return i
                         }
                         else -> {
-                            Bukkit.createInventory(null, 9, ComponentUtil.toText(
+                            return Bukkit.createInventory(null, 9, ComponentUtil.toText(
                                 "오류! 세계가 존재하지 않거나 너무 많습니다.", "000000"
                             ))
                         }
                     }
                 }
+            }
+        }
+
+        private fun worldSettingAssist(i: Inventory) {
+            for ((count, world) in Bukkit.getWorlds().withIndex()) {
+                i.setItem(count,
+                    when (world.name) {
+                        "WORLD" -> {
+                            val w = Bukkit.getWorld("WORLD") ?: return
+                            val coord = ComponentUtil.getWorldSettingWhether(w, WorldSettingOption.COORDINATE) ?: return
+                            val chat = ComponentUtil.getWorldSettingWhether(w, WorldSettingOption.CHAT) ?: return
+                            ItemUtil.toItem(Material.GRASS_BLOCK, 1,
+                                ComponentUtil.toText("오버월드 설정", Color.LIME.code),
+                                arrayListOf(
+                                    ComponentUtil.toText("", Color.WHITE.code),
+                                    Component.text().append(
+                                        ComponentUtil.toText("오버월드 채팅 가능 여부: ", Color.WHITE.code),
+                                        chat
+                                    ).build(),
+                                    Component.text().append(
+                                        ComponentUtil.toText("오버월드 좌표 활성화 여부: ", Color.WHITE.code),
+                                        coord
+                                    ).build()
+                                )
+                            )
+                        }
+                        "WORLD_NETHER" -> {
+                            val w = Bukkit.getWorld("WORLD_NETHER") ?: return
+                            val coord = ComponentUtil.getWorldSettingWhether(w, WorldSettingOption.COORDINATE) ?: return
+                            val chat = ComponentUtil.getWorldSettingWhether(w, WorldSettingOption.CHAT) ?: return
+                            ItemUtil.toItem(Material.NETHERRACK, 1,
+                                ComponentUtil.toText("네더 설정", Color.LIME.code),
+                                arrayListOf(
+                                    ComponentUtil.toText("", Color.WHITE.code),
+                                    Component.text().append(
+                                        ComponentUtil.toText("네더 채팅 가능 여부: ", Color.WHITE.code),
+                                        chat
+                                    ).build(),
+                                    Component.text().append(
+                                        ComponentUtil.toText("네더 좌표 활성화 여부: ", Color.WHITE.code),
+                                        coord
+                                    ).build()
+                                )
+                            )
+                        }
+                        "WORLD_THE_END" -> {
+                            val w = Bukkit.getWorld("WORLD_THE_END") ?: return
+                            val coord = ComponentUtil.getWorldSettingWhether(w, WorldSettingOption.COORDINATE) ?: return
+                            val chat = ComponentUtil.getWorldSettingWhether(w, WorldSettingOption.CHAT) ?: return
+                            ItemUtil.toItem(Material.END_STONE, 1,
+                                ComponentUtil.toText("엔드 설정", Color.LIME.code),
+                                arrayListOf(
+                                    ComponentUtil.toText("", Color.WHITE.code),
+                                    Component.text().append(
+                                        ComponentUtil.toText("엔드 채팅 가능 여부: ", Color.WHITE.code),
+                                        chat
+                                    ).build(),
+                                    Component.text().append(
+                                        ComponentUtil.toText("엔드 좌표 활성화 여부: ", Color.WHITE.code),
+                                        coord
+                                    ).build()
+                                )
+                            )
+                        }
+                        else -> {
+                            val w = world ?: return
+                            val coord = ComponentUtil.getWorldSettingWhether(w, WorldSettingOption.COORDINATE) ?: return
+                            val chat = ComponentUtil.getWorldSettingWhether(w, WorldSettingOption.CHAT) ?: return
+                            ItemUtil.toItem(Material.STONE, 1,
+                                ComponentUtil.toText("${world.name} 세계 설정", Color.LIME.code),
+                                arrayListOf(
+                                    ComponentUtil.toText("", Color.WHITE.code),
+                                    Component.text().append(
+                                        ComponentUtil.toText("${world.name} 세계 채팅 가능 여부: ", Color.WHITE.code),
+                                        chat
+                                    ).build(),
+                                    Component.text().append(
+                                        ComponentUtil.toText("${world.name} 세계 좌표 활성화 여부: ", Color.WHITE.code),
+                                        coord
+                                    ).build()
+                                )
+                            )
+                        }
+                    }
+                )
             }
         }
     }
