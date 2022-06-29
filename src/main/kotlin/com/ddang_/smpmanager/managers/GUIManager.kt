@@ -253,7 +253,7 @@ class GUIManager {
             for ((count, world) in Bukkit.getWorlds().withIndex()) {
                 i.setItem(count,
                     when (world.name) {
-                        "WORLD" -> {
+                        "world" -> {
                             val w = Bukkit.getWorld("WORLD") ?: return
                             val coord = ComponentUtil.getWorldSettingWhether(w, WorldSettingOption.COORDINATE) ?: return
                             val chat = ComponentUtil.getWorldSettingWhether(w, WorldSettingOption.CHAT) ?: return
@@ -269,6 +269,7 @@ class GUIManager {
                                         ComponentUtil.toText("오버월드 좌표 활성화 여부: ", Color.WHITE.code),
                                         coord
                                     ).build(),
+                                    ComponentUtil.toText("", Color.WHITE.code),
                                     ComponentUtil.toText("좌클릭해 채팅 가능 여부를 조절합니다.", Color.YELLOW.code),
                                     ComponentUtil.toText("우클릭해 좌표 표시 여부를 조절합니다.", Color.YELLOW.code)
                                 )
@@ -276,7 +277,7 @@ class GUIManager {
                             ItemUtil.applyStringPDC(item, "identify", world.name)
                             item
                         }
-                        "WORLD_NETHER" -> {
+                        "world_nether" -> {
                             val w = Bukkit.getWorld("WORLD_NETHER") ?: return
                             val coord = ComponentUtil.getWorldSettingWhether(w, WorldSettingOption.COORDINATE) ?: return
                             val chat = ComponentUtil.getWorldSettingWhether(w, WorldSettingOption.CHAT) ?: return
@@ -292,6 +293,7 @@ class GUIManager {
                                         ComponentUtil.toText("네더 좌표 활성화 여부: ", Color.WHITE.code),
                                         coord
                                     ).build(),
+                                    ComponentUtil.toText("", Color.WHITE.code),
                                     ComponentUtil.toText("좌클릭해 채팅 가능 여부를 조절합니다.", Color.YELLOW.code),
                                     ComponentUtil.toText("우클릭해 좌표 표시 여부를 조절합니다.", Color.YELLOW.code)
                                 )
@@ -299,7 +301,7 @@ class GUIManager {
                             ItemUtil.applyStringPDC(item, "identify", world.name)
                             item
                         }
-                        "WORLD_THE_END" -> {
+                        "world_the_end" -> {
                             val w = Bukkit.getWorld("WORLD_THE_END") ?: return
                             val coord = ComponentUtil.getWorldSettingWhether(w, WorldSettingOption.COORDINATE) ?: return
                             val chat = ComponentUtil.getWorldSettingWhether(w, WorldSettingOption.CHAT) ?: return
@@ -315,6 +317,7 @@ class GUIManager {
                                         ComponentUtil.toText("엔드 좌표 활성화 여부: ", Color.WHITE.code),
                                         coord
                                     ).build(),
+                                    ComponentUtil.toText("", Color.WHITE.code),
                                     ComponentUtil.toText("좌클릭해 채팅 가능 여부를 조절합니다.", Color.YELLOW.code),
                                     ComponentUtil.toText("우클릭해 좌표 표시 여부를 조절합니다.", Color.YELLOW.code)
                                 )
@@ -338,6 +341,7 @@ class GUIManager {
                                         ComponentUtil.toText("${world.name} 세계 좌표 활성화 여부: ", Color.WHITE.code),
                                         coord
                                     ).build(),
+                                    ComponentUtil.toText("", Color.WHITE.code),
                                     ComponentUtil.toText("좌클릭해 채팅 가능 여부를 조절합니다.", Color.YELLOW.code),
                                     ComponentUtil.toText("우클릭해 좌표 표시 여부를 조절합니다.", Color.YELLOW.code)
                                 )

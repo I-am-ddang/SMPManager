@@ -1,6 +1,7 @@
 package com.ddang_.smpmanager.listeners.player
 
 import com.ddang_.smpmanager.Smpmanager
+import com.ddang_.smpmanager.Smpmanager.Companion.rl
 import com.ddang_.smpmanager.managers.TeleportManager
 import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
@@ -13,6 +14,8 @@ class RespawnListener: Listener {
         if (!Smpmanager.pluginConfig.randomRespawn) {
             return
         }
-        TeleportManager.randomTeleport(p, Smpmanager.pluginConfig.randomRespawnRange)
+        (1L).rl {
+            TeleportManager.randomTeleport(p, Smpmanager.pluginConfig.randomRespawnRange)
+        }
     }
 }

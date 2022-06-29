@@ -1,6 +1,7 @@
 package com.ddang_.smpmanager.listeners.player
 
 import com.ddang_.smpmanager.Smpmanager
+import com.ddang_.smpmanager.Smpmanager.Companion.broad
 import com.ddang_.smpmanager.enums.ChatState
 import com.ddang_.smpmanager.enums.Color
 import com.ddang_.smpmanager.managers.MemberManager
@@ -12,6 +13,7 @@ import net.kyori.adventure.text.Component
 import net.kyori.adventure.text.serializer.plain.PlainTextComponentSerializer
 import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
+import org.bukkit.scheduler.BukkitRunnable
 
 class AsyncChatListener: Listener {
     @EventHandler
@@ -22,6 +24,7 @@ class AsyncChatListener: Listener {
             val m = MemberManager.getMember(p.name) ?: return
             when (m.chatState) {
                 ChatState.RANDOM_TELEPORT_RANGE_SET -> {
+                    e.isCancelled = true
                     val range = PlainTextComponentSerializer.plainText().serialize(e.message())
                     val rangeToInt = range.toIntOrNull() ?: kotlin.run {
                         p.sendMessage(
@@ -31,11 +34,22 @@ class AsyncChatListener: Listener {
                             ).build()
                         )
                         m.chatState = ChatState.NONE
+                        p.clearTitle()
                         return
                     }
-                    TeleportManager.randomTeleport(p, rangeToInt)
+
+                    m.chatState = ChatState.NONE
+                    p.clearTitle()
+                    object : BukkitRunnable() {
+                        override fun run() {
+                            Smpmanager.players.forEach {
+                                TeleportManager.randomTeleport(it, rangeToInt)
+                            }
+                        }
+                    }.runTask(Smpmanager.instance)
                 }
                 ChatState.RANDOM_RESPAWN_RANGE_SET -> {
+                    e.isCancelled = true
                     val range = PlainTextComponentSerializer.plainText().serialize(e.message())
                     val rangeToInt = range.toIntOrNull() ?: kotlin.run {
                         p.sendMessage(
@@ -45,8 +59,11 @@ class AsyncChatListener: Listener {
                             ).build()
                         )
                         m.chatState = ChatState.NONE
+                        p.clearTitle()
                         return
                     }
+                    m.chatState = ChatState.NONE
+                    p.clearTitle()
                     Smpmanager.pluginConfig.randomRespawnRange = rangeToInt
                 }
                 else -> {

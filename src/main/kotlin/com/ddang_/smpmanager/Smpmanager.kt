@@ -1,7 +1,6 @@
 package com.ddang_.smpmanager
 
 import com.ddang_.smpmanager.commands.MenuCommand
-import com.ddang_.smpmanager.enums.ChatState
 import com.ddang_.smpmanager.enums.ChatState.*
 import com.ddang_.smpmanager.enums.Color
 import com.ddang_.smpmanager.listeners.inventory.ClickListener
@@ -14,7 +13,6 @@ import com.ddang_.smpmanager.managers.MemberManager
 import com.ddang_.smpmanager.managers.PluginConfigManager
 import com.ddang_.smpmanager.managers.WorldSettingOptionManager
 import com.ddang_.smpmanager.objects.PluginConfig
-import com.ddang_.smpmanager.objects.WorldSettingOption
 import com.ddang_.smpmanager.utils.ComponentUtil
 import net.kyori.adventure.text.Component
 import net.kyori.adventure.title.Title
