@@ -36,6 +36,8 @@ class MenuGUI: CustomGUIHolder() {
                 p.playSound(p.location, Sound.BLOCK_NOTE_BLOCK_PLING, 1f, 2f)
             }
             "1" -> {
+                val i = GUIManager.getInventory(InventoryName.CUSTOM_RECIPE)
+                p.openInventory(i)
                 p.playSound(p.location, Sound.BLOCK_NOTE_BLOCK_PLING, 1f, 2f)
             }
             "2" -> {
@@ -49,6 +51,8 @@ class MenuGUI: CustomGUIHolder() {
                 p.playSound(p.location, Sound.BLOCK_NOTE_BLOCK_PLING, 1f, 2f)
             }
             "4" -> {
+                val i = GUIManager.getInventory(InventoryName.CUSTOM_EVENT)
+                p.openInventory(i)
                 p.playSound(p.location, Sound.BLOCK_NOTE_BLOCK_PLING, 1f, 2f)
             }
             else -> {

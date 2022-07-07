@@ -16,7 +16,10 @@ class PluginConfigManager {
             val randomRespawn = configData.getBoolean("Setting.RandomRespawn")
             val randomRespawnRange = configData.getInt("Setting.RandomRespawnRange")
 
-            return PluginConfig(quickMenu, randomRespawn, randomRespawnRange)
+            return PluginConfig(
+                quickMenu, randomRespawn, randomRespawnRange,
+                EventCage(false, false)
+            )
         }
 
         fun save() {

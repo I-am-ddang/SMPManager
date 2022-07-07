@@ -18,6 +18,9 @@ class GUIManager {
     companion object {
         fun getInventory(inventoryName: InventoryName): Inventory {
             when (inventoryName) {
+
+
+
                 InventoryName.MENU -> {
                     val i = Bukkit.createInventory(MenuGUI(), 18, ComponentUtil.toText(
                         "메뉴", "000000"
@@ -122,6 +125,9 @@ class GUIManager {
 
                     return i
                 }
+
+
+
                 InventoryName.RANDOM_RESPAWN -> {
                     val i = Bukkit.createInventory(RandomRespawnGUI(), 9, ComponentUtil.toText(
                         "무작위 부활 위치 설정", "000000"
@@ -183,6 +189,9 @@ class GUIManager {
 
                     return i
                 }
+
+
+
                 InventoryName.WORLD_SETTING -> {
                     when (Bukkit.getWorlds().size) {
                         in 1..9 -> {
@@ -245,6 +254,51 @@ class GUIManager {
                             ))
                         }
                     }
+                }
+
+                InventoryName.CUSTOM_EVENT -> {
+                    val i = Bukkit.createInventory(RandomRespawnGUI(), 9, ComponentUtil.toText(
+                        "특수 행사 개최", "000000"
+                    ))
+
+                    var item = ItemUtil.toItem(
+                        Material.DRAGON_EGG, 1,
+                        ComponentUtil.toText("엔더 드래곤의 가호", Color.LIME.code),
+                        arrayListOf(
+                            ComponentUtil.toText("", Color.WHITE.code),
+                            ComponentUtil.toText("오버월드 0,0 을 기준으로 무작위 범위 내에", Color.WHITE.code),
+                            ComponentUtil.toText("엔더 드래곤 알을 설치할시 보상을 주는 행사입니다.", Color.WHITE.code),
+                            ComponentUtil.toText("범위는 직접 정할 수 있습니다.", Color.WHITE.code),
+                            ComponentUtil.toText("", Color.WHITE.code),
+                            ComponentUtil.toText("클릭시 진행합니다.", Color.YELLOW.code)
+                        )
+                    )
+                    ItemUtil.applyStringPDC(item, "identify", "0")
+                    i.setItem(0, item)
+
+                    item = ItemUtil.toItem(
+                        Material.ENCHANTED_GOLDEN_APPLE, 1,
+                        ComponentUtil.toText("마법이 걸린 사과나무", Color.LIME.code),
+                        arrayListOf(
+                            ComponentUtil.toText("", Color.WHITE.code),
+                            ComponentUtil.toText("1분 동안 참나무 나뭇잎을 캘 때", Color.WHITE.code),
+                            ComponentUtil.toText("0.1% 확률로 마법이 걸린 황금사과가", Color.WHITE.code),
+                            ComponentUtil.toText("나오는 행사입니다.", Color.WHITE.code),
+                            ComponentUtil.toText("", Color.WHITE.code),
+                            ComponentUtil.toText("클릭시 진행합니다.", Color.YELLOW.code)
+                        )
+                    )
+                    ItemUtil.applyStringPDC(item, "identify", "1")
+                    i.setItem(1, item)
+
+                    return i
+                }
+
+                InventoryName.CUSTOM_RECIPE -> {
+                    val i = Bukkit.createInventory(RandomRespawnGUI(), 9, ComponentUtil.toText(
+                        "특수 아이템 조합법 설정", "000000"
+                    ))
+                    return i
                 }
             }
         }
