@@ -65,6 +65,17 @@ class CustomItemManager {
                     ComponentUtil.toText("공중 부양 효과를 받습니다.", Color.WHITE.code),
                 )
             )
+            CustomItem(
+                2,
+                ComponentUtil.toText("위치 추적기", Color.DARK_PURPLE.code),
+                Material.COMPASS,
+                arrayListOf(
+                    ComponentUtil.toText("", Color.WHITE.code),
+                    ComponentUtil.toText("들고 우클릭을 하면 이 아이템을 소모해", Color.WHITE.code),
+                    ComponentUtil.toText("8분 동안 서버내 무작위 플레이어 한명의", Color.WHITE.code),
+                    ComponentUtil.toText("좌표를 추적합니다.", Color.WHITE.code),
+                )
+            )
         }
     }
 }

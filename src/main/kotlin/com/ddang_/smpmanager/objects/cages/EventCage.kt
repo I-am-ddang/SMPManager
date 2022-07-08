@@ -1,4 +1,4 @@
-package com.ddang_.smpmanager.objects
+package com.ddang_.smpmanager.objects.cages
 
 import org.bukkit.Location
 

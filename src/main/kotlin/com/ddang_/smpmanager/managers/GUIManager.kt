@@ -5,12 +5,15 @@ import com.ddang_.smpmanager.enums.Color
 import com.ddang_.smpmanager.enums.InventoryName
 import com.ddang_.smpmanager.enums.WorldSettingOption
 import com.ddang_.smpmanager.guis.*
+import com.ddang_.smpmanager.guis.customrecipes.TrackerGUI
 import com.ddang_.smpmanager.utils.ComponentUtil
 import com.ddang_.smpmanager.utils.ItemUtil
 import net.kyori.adventure.text.Component
 import org.bukkit.Bukkit
 import org.bukkit.Material
+import org.bukkit.enchantments.Enchantment
 import org.bukkit.inventory.Inventory
+import org.bukkit.inventory.ItemStack
 
 class GUIManager {
     companion object {
@@ -296,6 +299,51 @@ class GUIManager {
                     val i = Bukkit.createInventory(CustomRecipeGUI(), 9, ComponentUtil.toText(
                         "특수 아이템 조합법 설정", "000000"
                     ))
+
+                    val item = ItemUtil.toItem(
+                        Material.COMPASS, 1,
+                        ComponentUtil.toText("위치 추적기 조합법 설정", Color.LIME.code),
+                        arrayListOf(
+                            ComponentUtil.toText("", Color.WHITE.code),
+                            ComponentUtil.toText("클릭시 조합법을 설정합니다.", Color.YELLOW.code)
+                        )
+                    )
+                    ItemUtil.applyStringPDC(item, "identify", "0")
+                    i.setItem(0, item)
+
+                    return i
+                }
+
+                InventoryName.RECIPE_TRACKER -> {
+                    val i = Bukkit.createInventory(TrackerGUI(), 27, ComponentUtil.toText(
+                        "위치 추적기 조합법 설정 (창을 닫아 설정한 조합법을 저장합니다.)", "000000"
+                    ))
+
+                    for (n in 0..26) {
+                        i.setItem(n, ItemUtil.toItem(
+                            Material.LIGHT_GRAY_STAINED_GLASS_PANE, 1,
+                            ComponentUtil.toText("", Color.WHITE.code),
+                            arrayListOf(
+                                ComponentUtil.toText("", Color.WHITE.code)
+                            )
+                        ))
+                    }
+
+                    i.setItem(3, Smpmanager.pluginConfig.recipeCage.tracker.slot0)
+                    i.setItem(4, Smpmanager.pluginConfig.recipeCage.tracker.slot1)
+                    i.setItem(5, Smpmanager.pluginConfig.recipeCage.tracker.slot2)
+                    i.setItem(12, Smpmanager.pluginConfig.recipeCage.tracker.slot3)
+                    i.setItem(13, Smpmanager.pluginConfig.recipeCage.tracker.slot4)
+                    i.setItem(14, Smpmanager.pluginConfig.recipeCage.tracker.slot5)
+                    i.setItem(21, Smpmanager.pluginConfig.recipeCage.tracker.slot6)
+                    i.setItem(22, Smpmanager.pluginConfig.recipeCage.tracker.slot7)
+                    i.setItem(23, Smpmanager.pluginConfig.recipeCage.tracker.slot8)
+
+                    val result = CustomItemManager.getCustomItem(2)?.toItem() ?: ItemStack(Material.WOODEN_SWORD)
+                    ItemUtil.applyStringPDC(result, "result", "true")
+
+                    i.setItem(16, result)
+
                     return i
                 }
             }
