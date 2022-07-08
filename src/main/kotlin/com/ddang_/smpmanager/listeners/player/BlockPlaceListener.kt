@@ -3,6 +3,7 @@ package com.ddang_.smpmanager.listeners.player
 import com.ddang_.smpmanager.Smpmanager
 import com.ddang_.smpmanager.Smpmanager.Companion.broad
 import com.ddang_.smpmanager.managers.CustomItemManager
+import org.bukkit.Material
 import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
 import org.bukkit.event.block.BlockPlaceEvent
@@ -17,8 +18,13 @@ class BlockPlaceListener: Listener {
         if (!Smpmanager.pluginConfig.eventCage.enderDragon) {
             return
         }
-        val eloc = Smpmanager.pluginConfig.eventCage.enderDragonLoc ?: return
-        if (loc != eloc) {
+
+        if (e.block.type != Material.DRAGON_EGG) {
+            return
+        }
+
+        val eLoc = Smpmanager.pluginConfig.eventCage.enderDragonLoc ?: return
+        if (loc != eLoc) {
             return
         }
 

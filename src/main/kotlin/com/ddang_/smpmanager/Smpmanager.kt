@@ -149,7 +149,7 @@ class Smpmanager : JavaPlugin() {
 
     private val events = arrayOf(
         SwapItemListener(), ClickListener(), CloseListener(), AsyncChatListener(),
-        RespawnListener(), JoinQuitListener(), BlockPlaceListener(), JumpListener()
+        RespawnListener(), JoinQuitListener(), BlockPlaceListener()
     )
 
     override fun onEnable() {
@@ -174,6 +174,8 @@ class Smpmanager : JavaPlugin() {
         eventAlert()
 
         CustomItemManager.set()
+
+        CustomItemManager.runAbility()
 
         //이벤트 등록
         server.pluginManager.apply { events.forEach { registerEvents(it, this@Smpmanager) } }
