@@ -1,6 +1,8 @@
 package com.ddang_.smpmanager.managers
 
 import com.ddang_.smpmanager.Smpmanager
+import com.ddang_.smpmanager.utils.ItemUtil
+import org.bukkit.Bukkit
 import org.bukkit.Material
 import org.bukkit.NamespacedKey
 import org.bukkit.enchantments.Enchantment
@@ -15,9 +17,12 @@ class RecipeManager {
         }
 
         fun registerTracker() {
+
             val trackerKey = NamespacedKey(Smpmanager.instance, "tracker")
+            Bukkit.removeRecipe(trackerKey)
             val trackerResult = CustomItemManager.getCustomItem(2)?.toItem() ?: ItemStack(Material.WOODEN_SWORD)
             trackerResult.addUnsafeEnchantment(Enchantment.OXYGEN, 1)
+            ItemUtil.applyStringPDC(trackerResult, "customItem", "2")
 
             val trackerRecipe = ShapedRecipe(trackerKey, trackerResult)
 
@@ -60,6 +65,8 @@ class RecipeManager {
             if (i.isNotEmpty()) {
                 trackerRecipe.setIngredient(i[0], Smpmanager.pluginConfig.recipeCage.tracker.slot8.type)
             }
+
+            Bukkit.addRecipe(trackerRecipe)
         }
     }
 }

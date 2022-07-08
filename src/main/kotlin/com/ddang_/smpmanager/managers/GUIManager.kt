@@ -321,7 +321,7 @@ class GUIManager {
 
                     for (n in 0..26) {
                         i.setItem(n, ItemUtil.toItem(
-                            Material.LIGHT_GRAY_STAINED_GLASS_PANE, 1,
+                            Material.GRAY_STAINED_GLASS_PANE, 1,
                             ComponentUtil.toText("", Color.WHITE.code),
                             arrayListOf(
                                 ComponentUtil.toText("", Color.WHITE.code)

@@ -18,7 +18,7 @@ class MemberManager {
         }
 
         fun set(p: Player) {
-            Member(p, ChatState.NONE)
+            Member(p, ChatState.NONE, null)
         }
     }
 }

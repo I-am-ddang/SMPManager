@@ -2,6 +2,7 @@ package com.ddang_.smpmanager.guis.customrecipes
 
 import com.ddang_.smpmanager.Smpmanager
 import com.ddang_.smpmanager.guis.CustomGUIHolder
+import com.ddang_.smpmanager.managers.RecipeManager
 import com.ddang_.smpmanager.utils.ItemUtil
 import org.bukkit.Material
 import org.bukkit.event.inventory.InventoryClickEvent
@@ -13,7 +14,7 @@ class TrackerGUI: CustomGUIHolder() {
 
         val item = e.currentItem ?: return
 
-        if (item.type == Material.LIGHT_GRAY_STAINED_GLASS_PANE) {
+        if (item.type == Material.GRAY_STAINED_GLASS_PANE) {
             e.isCancelled = true
         }
 
@@ -39,6 +40,8 @@ class TrackerGUI: CustomGUIHolder() {
         Smpmanager.pluginConfig.recipeCage.tracker.slot6 = e.inventory.getItem(21) ?: ItemStack(Material.AIR)
         Smpmanager.pluginConfig.recipeCage.tracker.slot7 = e.inventory.getItem(22) ?: ItemStack(Material.AIR)
         Smpmanager.pluginConfig.recipeCage.tracker.slot8 = e.inventory.getItem(23) ?: ItemStack(Material.AIR)
+
+        RecipeManager.registerTracker()
 
         return
     }

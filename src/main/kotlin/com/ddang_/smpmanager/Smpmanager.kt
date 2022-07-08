@@ -6,10 +6,7 @@ import com.ddang_.smpmanager.enums.Color
 import com.ddang_.smpmanager.listeners.inventory.ClickListener
 import com.ddang_.smpmanager.listeners.inventory.CloseListener
 import com.ddang_.smpmanager.listeners.player.*
-import com.ddang_.smpmanager.managers.CustomItemManager
-import com.ddang_.smpmanager.managers.MemberManager
-import com.ddang_.smpmanager.managers.PluginConfigManager
-import com.ddang_.smpmanager.managers.WorldSettingOptionManager
+import com.ddang_.smpmanager.managers.*
 import com.ddang_.smpmanager.objects.PluginConfig
 import com.ddang_.smpmanager.utils.ComponentUtil
 import net.kyori.adventure.text.Component
@@ -108,6 +105,25 @@ class Smpmanager : JavaPlugin() {
         }
     }
 
+    private fun track() {
+        (20L).rt {
+            players.forEach {
+                val m = MemberManager.getMember(it.name) ?: return@forEach
+                if (m.target == null) {
+                    return@forEach
+                }
+                val loc = m.target?.location
+                it.sendActionBar(
+                    Component.text().append(
+                        ComponentUtil.toText("위치 추적기 작동 중", Color.DARK_PURPLE.code),
+                        ComponentUtil.toText(" ${m.target?.name} 님의 좌표: ", Color.WHITE.code),
+                        ComponentUtil.toText("${loc?.x?.toInt()} / ${loc?.y?.toInt()} / ${loc?.z?.toInt()}", Color.WHITE.code),
+                    ).build()
+                )
+            }
+        }
+    }
+
     private fun worldFirstSet() {
         Bukkit.getWorlds().forEach {
             WorldSettingOptionManager.firstSet(it)
@@ -149,7 +165,8 @@ class Smpmanager : JavaPlugin() {
 
     private val events = arrayOf(
         SwapItemListener(), ClickListener(), CloseListener(), AsyncChatListener(),
-        RespawnListener(), JoinQuitListener(), BlockPlaceListener(), BlockBreakListener()
+        RespawnListener(), JoinQuitListener(), BlockPlaceListener(),
+        BlockBreakListener(), InteractListener()
     )
 
     override fun onEnable() {
@@ -176,6 +193,10 @@ class Smpmanager : JavaPlugin() {
         CustomItemManager.set()
 
         CustomItemManager.runAbility()
+
+        RecipeManager.registerAll()
+
+        track()
 
         //이벤트 등록
         server.pluginManager.apply { events.forEach { registerEvents(it, this@Smpmanager) } }
