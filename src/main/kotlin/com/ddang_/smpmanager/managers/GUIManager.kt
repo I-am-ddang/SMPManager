@@ -4,9 +4,7 @@ import com.ddang_.smpmanager.Smpmanager
 import com.ddang_.smpmanager.enums.Color
 import com.ddang_.smpmanager.enums.InventoryName
 import com.ddang_.smpmanager.enums.WorldSettingOption
-import com.ddang_.smpmanager.guis.MenuGUI
-import com.ddang_.smpmanager.guis.RandomRespawnGUI
-import com.ddang_.smpmanager.guis.WorldSettingGUI
+import com.ddang_.smpmanager.guis.*
 import com.ddang_.smpmanager.utils.ComponentUtil
 import com.ddang_.smpmanager.utils.ItemUtil
 import net.kyori.adventure.text.Component
@@ -257,7 +255,7 @@ class GUIManager {
                 }
 
                 InventoryName.CUSTOM_EVENT -> {
-                    val i = Bukkit.createInventory(RandomRespawnGUI(), 9, ComponentUtil.toText(
+                    val i = Bukkit.createInventory(CustomEventGUI(), 9, ComponentUtil.toText(
                         "특수 행사 개최", "000000"
                     ))
 
@@ -281,7 +279,7 @@ class GUIManager {
                         ComponentUtil.toText("마법이 걸린 사과나무", Color.LIME.code),
                         arrayListOf(
                             ComponentUtil.toText("", Color.WHITE.code),
-                            ComponentUtil.toText("1분 동안 참나무 나뭇잎을 캘 때", Color.WHITE.code),
+                            ComponentUtil.toText("3분 동안 참나무 나뭇잎을 캘 때", Color.WHITE.code),
                             ComponentUtil.toText("0.1% 확률로 마법이 걸린 황금사과가", Color.WHITE.code),
                             ComponentUtil.toText("나오는 행사입니다.", Color.WHITE.code),
                             ComponentUtil.toText("", Color.WHITE.code),
@@ -295,7 +293,7 @@ class GUIManager {
                 }
 
                 InventoryName.CUSTOM_RECIPE -> {
-                    val i = Bukkit.createInventory(RandomRespawnGUI(), 9, ComponentUtil.toText(
+                    val i = Bukkit.createInventory(CustomRecipeGUI(), 9, ComponentUtil.toText(
                         "특수 아이템 조합법 설정", "000000"
                     ))
                     return i

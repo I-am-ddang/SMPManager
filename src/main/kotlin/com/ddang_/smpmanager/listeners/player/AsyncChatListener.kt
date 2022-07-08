@@ -8,9 +8,11 @@ import com.ddang_.smpmanager.managers.MemberManager
 import com.ddang_.smpmanager.managers.TeleportManager
 import com.ddang_.smpmanager.managers.WorldSettingOptionManager
 import com.ddang_.smpmanager.utils.ComponentUtil
+import com.ddang_.smpmanager.utils.LocationUtil
 import io.papermc.paper.event.player.AsyncChatEvent
 import net.kyori.adventure.text.Component
 import net.kyori.adventure.text.serializer.plain.PlainTextComponentSerializer
+import org.bukkit.Bukkit
 import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
 import org.bukkit.scheduler.BukkitRunnable
@@ -65,6 +67,32 @@ class AsyncChatListener: Listener {
                     m.chatState = ChatState.NONE
                     p.clearTitle()
                     Smpmanager.pluginConfig.randomRespawnRange = rangeToInt
+                }
+                ChatState.EVENT_ENDER_DRAGON -> {
+                    e.isCancelled = true
+                    val range = PlainTextComponentSerializer.plainText().serialize(e.message())
+                    val rangeToInt = range.toIntOrNull() ?: kotlin.run {
+                        p.sendMessage(
+                            Component.text().append(
+                                ComponentUtil.toText("  엔더 드래곤의 가호", Color.RED.code),
+                                ComponentUtil.toText(" 범위 설정을 위해 숫자를 입력해주세요.", Color.WHITE.code)
+                            ).build()
+                        )
+                        m.chatState = ChatState.NONE
+                        p.clearTitle()
+                        return
+                    }
+                    m.chatState = ChatState.NONE
+                    p.clearTitle()
+
+                    //행사 시작
+                    val w = Bukkit.getWorld("world") ?: return
+                    Smpmanager.pluginConfig.eventCage.enderDragon = true
+                    Smpmanager.pluginConfig.eventCage.enderDragonLoc = TeleportManager.getRandomSpot(w, rangeToInt)
+
+                    val loc = Smpmanager.pluginConfig.eventCage.enderDragonLoc ?: return
+
+                    ("§5§l  엔더 드래곤의 가호 §f드래곤 알을 오버 월드 x: ${loc.x} y: ${loc.y} z: ${loc.z} 에 설치해 권위적인 보상을 획득하세요! ").broad()
                 }
                 else -> {
                     return

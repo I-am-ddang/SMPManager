@@ -1,6 +1,7 @@
 package com.ddang_.smpmanager.managers
 
 import com.ddang_.smpmanager.Smpmanager
+import com.ddang_.smpmanager.objects.EventCage
 import com.ddang_.smpmanager.objects.PluginConfig
 import org.bukkit.configuration.file.YamlConfiguration
 import java.io.File
@@ -18,7 +19,7 @@ class PluginConfigManager {
 
             return PluginConfig(
                 quickMenu, randomRespawn, randomRespawnRange,
-                EventCage(false, false)
+                EventCage(false, false, null)
             )
         }
 

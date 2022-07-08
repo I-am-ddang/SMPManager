@@ -5,10 +5,8 @@ import com.ddang_.smpmanager.enums.ChatState.*
 import com.ddang_.smpmanager.enums.Color
 import com.ddang_.smpmanager.listeners.inventory.ClickListener
 import com.ddang_.smpmanager.listeners.inventory.CloseListener
-import com.ddang_.smpmanager.listeners.player.AsyncChatListener
-import com.ddang_.smpmanager.listeners.player.JoinQuitListener
-import com.ddang_.smpmanager.listeners.player.RespawnListener
-import com.ddang_.smpmanager.listeners.player.SwapItemListener
+import com.ddang_.smpmanager.listeners.player.*
+import com.ddang_.smpmanager.managers.CustomItemManager
 import com.ddang_.smpmanager.managers.MemberManager
 import com.ddang_.smpmanager.managers.PluginConfigManager
 import com.ddang_.smpmanager.managers.WorldSettingOptionManager
@@ -78,7 +76,34 @@ class Smpmanager : JavaPlugin() {
                             )
                         ))
                     }
+                    EVENT_ENDER_DRAGON -> {
+                        it.showTitle(Title.title(
+                            Component.text().append(
+                                ComponentUtil.toText("범위를 입력하세요", Color.LIME.code)
+                            ).build(),
+                            Component.text().append(
+                                ComponentUtil.toText("숫자를 입력해야합니다.", Color.WHITE.code)
+                            ).build(),
+                            Title.Times.of(
+                                Duration.ofSeconds(0),
+                                Duration.ofSeconds(20),
+                                Duration.ofSeconds(0)
+                            )
+                        ))
+                    }
                 }
+            }
+        }
+    }
+
+    private fun eventAlert() {
+        (20L*60*3).rt {
+            if (pluginConfig.eventCage.enderDragon) {
+                val loc = pluginConfig.eventCage.enderDragonLoc ?: return@rt
+
+                ("").broad()
+                ("§5§l  엔더 드래곤의 가호 §f엔더 드래곤의 가호를 아직 아무도 획득하지 않았습니다.").broad()
+                ("§5§l  엔더 드래곤의 가호 §f드래곤 알을 오버 월드 x: ${loc.x} y: ${loc.y} z: ${loc.z} 에 설치해 권위적인 보상을 획득하세요! ").broad()
             }
         }
     }
@@ -123,7 +148,8 @@ class Smpmanager : JavaPlugin() {
     }
 
     private val events = arrayOf(
-        SwapItemListener(), ClickListener(), CloseListener(), AsyncChatListener(), RespawnListener(), JoinQuitListener()
+        SwapItemListener(), ClickListener(), CloseListener(), AsyncChatListener(),
+        RespawnListener(), JoinQuitListener(), BlockPlaceListener(), JumpListener()
     )
 
     override fun onEnable() {
@@ -144,6 +170,10 @@ class Smpmanager : JavaPlugin() {
         showTitlePerChatState()
 
         worldCoordSet()
+
+        eventAlert()
+
+        CustomItemManager.set()
 
         //이벤트 등록
         server.pluginManager.apply { events.forEach { registerEvents(it, this@Smpmanager) } }
