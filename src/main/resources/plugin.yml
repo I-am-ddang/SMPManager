@@ -1,5 +1,5 @@
 name: SMPManager
-version: 1.0.1
+version: 1.0.17
 main: com.ddang_.smpmanager.Smpmanager
 api-version: 1.18
 authors: [ DDang_ ]
