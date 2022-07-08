@@ -1,8 +1,11 @@
 package com.ddang_.smpmanager.guis
 
 import com.ddang_.smpmanager.Smpmanager
+import com.ddang_.smpmanager.Smpmanager.Companion.broad
+import com.ddang_.smpmanager.Smpmanager.Companion.rl
 import com.ddang_.smpmanager.enums.ChatState
 import com.ddang_.smpmanager.enums.Color
+import com.ddang_.smpmanager.managers.CustomEventManager
 import com.ddang_.smpmanager.managers.MemberManager
 import com.ddang_.smpmanager.utils.ComponentUtil
 import com.ddang_.smpmanager.utils.ItemUtil
@@ -32,7 +35,14 @@ class CustomEventGUI: CustomGUIHolder() {
                 )
             }
             "1" -> {
-
+                Smpmanager.pluginConfig.eventCage.magicApple = true
+                CustomEventManager.oakLeafList.clear()
+                ("§d§l  마법이 걸린 사과나무 §f3분 동안 참나무 나뭇잎을 캘 때 0.1% 확률로 마법이 걸린 황금사과가 나옵니다. ").broad()
+                (20L*60*3).rl {
+                    Smpmanager.pluginConfig.eventCage.magicApple = false
+                    ("§d§l  마법이 걸린 사과나무 §f행사가 끝났습니다.").broad()
+                    CustomEventManager.oakLeafList.clear()
+                }
             }
             else -> {
                 return

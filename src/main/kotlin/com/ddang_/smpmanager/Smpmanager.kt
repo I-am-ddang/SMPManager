@@ -149,7 +149,7 @@ class Smpmanager : JavaPlugin() {
 
     private val events = arrayOf(
         SwapItemListener(), ClickListener(), CloseListener(), AsyncChatListener(),
-        RespawnListener(), JoinQuitListener(), BlockPlaceListener()
+        RespawnListener(), JoinQuitListener(), BlockPlaceListener(), BlockBreakListener()
     )
 
     override fun onEnable() {
